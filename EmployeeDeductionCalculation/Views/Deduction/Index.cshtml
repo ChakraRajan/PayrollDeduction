@@ -1,0 +1,50 @@
+﻿@model EmployeeDeductionCalculation.Models.Deduction
+
+@{
+    ViewBag.Title = "Employee Benefits Deduction Values";
+}
+
+<div>    
+     <h4>Benefits deduction calculation for employee @Html.Label(TempData["Employee"].ToString())</h4>            
+</div>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalGrossSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalGrossSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalEmployeeDeduction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalEmployeeDeduction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalDependentDeduction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalDependentDeduction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalNetSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalNetSalary)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to Calculation", "Index", "Employee")
+</p>

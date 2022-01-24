@@ -1,0 +1,134 @@
+﻿@model EmployeeDeductionCalculation.Models.Employee
+
+
+@{
+    ViewBag.Title = "Payroll Deduction";
+}
+
+@section scripts{
+    <script src="/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#divDependentData').hide();
+        });
+
+        function Details() {
+            $.get("@Url.Action("DisplayDependent", "Employee")",
+                function (data) {
+                    $('.modal-body').html(data);
+                });
+
+            $("#divDependentModal").modal("show");
+        }
+
+        //Add Data Function
+        function AddDependent() {
+
+            var DependentObj = {
+                DependentName: $('#DependentName').val(),
+            };
+
+            $.ajax({
+                url: "/Employee/AddDependent",
+                data: JSON.stringify(DependentObj),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    //populate table with new record
+                    BindDependentData();
+                    $('#divDependentModal').modal('hide');
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+        function BindDependentData() {
+            $.ajax({
+                url: "/Employee/GetAllDependents",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result && result.length > 0) {
+                        //itetrate thorugh each record and bind it to td
+                        $('#divDependentData').show();                                               
+
+                        var html = '';
+
+                        for (var i = 0; i < result.length; i++) {
+                            html += '<tr>';
+                            html += '<td>' + result[i]["DependentName"] + '</td>';
+                            html += '</tr>';
+                        }
+                        $('.tbody').html(html);
+                    }
+                    else {
+                        $('#divDependentData').hide();
+                    }
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+    </script>
+
+}
+
+<h2>Employee Benefits Deduction Calculation</h2>
+
+@using (Html.BeginForm("CalculateEmployeeDeduction", "Employee"))
+{
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(m => m.EmployeeName, new { @class = "form-control" })
+        </dt>
+        <dd>
+            @Html.TextBoxFor(m => m.EmployeeName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EmployeeName, "", new { @class = "text-danger" })
+        </dd>
+    </dl>
+
+    <p>
+        <input type="submit" name="calDeduction" value="Calculate Deduction" class="btn btn-primary" />
+        <input type="button" name="addNewDependency" value="Add Dependency" class="btn btn-default" data-toggle="modal" onclick="Details()" />
+        <input type="button" name="resetEmployee" value="Reset" class="btn btn-default" data-toggle="modal" onclick="location.href='@Url.Action("Reset", "Employee")'" />
+    </p>
+}
+
+<div id="divDependentData">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Dependents
+                </th>
+            </tr>
+        </thead>
+        <tbody class="tbody"></tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="divDependentModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Dependent</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

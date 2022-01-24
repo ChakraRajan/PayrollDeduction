@@ -1,0 +1,30 @@
+﻿@model EmployeeDeductionCalculation.Models.Deduction
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(m => m.TotalGrossSalary, new { @class = "form-control" })
+        </dt>
+        <dd>
+            @Html.TextBoxFor(m => m.TotalGrossSalary, new { @class = "form-control" })
+        </dd>
+        <dt>
+            @Html.LabelFor(m => m.TotalEmployeeDeduction, new { @class = "form-control" })
+        </dt>
+        <dd>
+            @Html.TextBoxFor(m => m.TotalEmployeeDeduction, new { @class = "form-control" })
+        </dd>
+        <dt>
+            @Html.LabelFor(m => m.TotalDependentDeduction, new { @class = "form-control" })
+        </dt>
+        <dd>
+            @Html.TextBoxFor(m => m.TotalDependentDeduction, new { @class = "form-control" })
+        </dd>
+        <dt>
+            @Html.LabelFor(m => m.TotalNetSalary, new { @class = "form-control" })
+        </dt>
+        <dd>
+            @Html.TextBoxFor(m => m.TotalNetSalary, new { @class = "form-control" })
+        </dd>
+    </dl>
+</div>
