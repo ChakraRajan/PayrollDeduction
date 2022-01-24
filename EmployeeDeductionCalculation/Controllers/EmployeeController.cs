@@ -74,6 +74,7 @@ namespace EmployeeDeductionCalculation.Controllers
             TempData["Employee"] = emp.EmployeeName;
             
             emp.EmployeeDependents.Clear();
+            emp.EmployeeName = "";
 
             return RedirectToAction("Index", "Deduction");
         }

@@ -54,7 +54,7 @@ namespace EmployeeDeductionCalculation.Tests.Controllers
         }
 
         [TestMethod]
-        public void TestRestView()
+        public void TestResetView()
         {
             var employeeController = new EmployeeController();
 

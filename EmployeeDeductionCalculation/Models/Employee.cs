@@ -9,7 +9,7 @@ namespace EmployeeDeductionCalculation.Models
 {
     public class Employee
     {
-        [Required(ErrorMessage = "Please enter Employee name.")]
+        [Required(ErrorMessage = "Please enter Employee Name.")]
         [DisplayName("Employee Name:")]
         public string EmployeeName { get; set; }
 
