@@ -9,14 +9,11 @@ namespace EmployeeDeductionCalculation.Controllers
 {
     public class DeductionController : Controller
     {
-        // GET: Deduction
+        // GET: To get the deduction details
         public ActionResult Index()
         {
             Deduction data = TempData["Deductions"] as Deduction;
-            //Employee employeeData = TempData["Employee"] as Employee;
-
-            var Employee = TempData["Employee"] as Employee;
-
+            
             return View(data);
         }       
     }

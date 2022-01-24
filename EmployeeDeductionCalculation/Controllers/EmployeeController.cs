@@ -20,6 +20,7 @@ namespace EmployeeDeductionCalculation.Controllers
             return View(emp);
         }
 
+        //Display Add dependent partial view as Modal popup
         public ActionResult DisplayDependent()
         {
             Dependent empDep = new Dependent();
@@ -27,6 +28,7 @@ namespace EmployeeDeductionCalculation.Controllers
             return PartialView("_DependentDetails", empDep);            
         }
 
+        //POST: To post the Add dependant values
         [HttpPost]
         public JsonResult AddDependent(string DependentName)
         {
@@ -46,18 +48,22 @@ namespace EmployeeDeductionCalculation.Controllers
             return Json(status, JsonRequestBehavior.AllowGet);
         }
 
+        //GET: To get all the dependant values
         public JsonResult GetAllDependents()
         {            
             return Json(emp.EmployeeDependents, JsonRequestBehavior.AllowGet);
         }
 
+        //To reset the page
         public ActionResult Reset()
         {           
             emp.EmployeeDependents.Clear();
+            emp.EmployeeName = "";
 
             return View("Index");
         }
 
+        //POST: To calculate and post the deduction values for the employees
         [HttpPost]
         public ActionResult CalculateEmployeeDeduction(Employee emp1)
         {
@@ -72,6 +78,7 @@ namespace EmployeeDeductionCalculation.Controllers
             return RedirectToAction("Index", "Deduction");
         }
 
+        //Calculate the deduction values for the Employees 
         public Deduction Calculate()
         {
             Deduction dec = new Deduction();

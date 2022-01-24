@@ -5,6 +5,9 @@ using System.Web;
 
 namespace EmployeeCalculationDeductionBusiness.Constants
 {
+    /// <summary>
+    /// Constant values used to set Employees default values.
+    /// </summary>
     public class EmployeeConstant
     {
         public const decimal employeeSpecialDiscountPercentage = 10;
@@ -16,6 +19,9 @@ namespace EmployeeCalculationDeductionBusiness.Constants
         public const string discountType = "Percentage";
     }
 
+    /// <summary>
+    /// Enum for the discount type used in the application
+    /// </summary>
     public enum DiscountType
     {
       Percentage,

@@ -17,7 +17,7 @@ namespace EmployeeDeductionCalculation.Service
             //If employee name starts with A, apply special discount
             if (empName.ToLower().StartsWith("a") && (EmployeeConstant.discountType == nameof(DiscountType.Percentage)))
             {
-                employeeNetDeduction = (1 - EmployeeConstant.employeeDeductionValue / 100) * EmployeeConstant.employeeDeductionValue;
+                employeeNetDeduction = (1 - EmployeeConstant.employeeSpecialDiscountPercentage / 100) * EmployeeConstant.employeeDeductionValue;
             }
 
             return employeeNetDeduction;
@@ -26,16 +26,15 @@ namespace EmployeeDeductionCalculation.Service
         public decimal CalculateDependentDeduction(List<Dependent> dependents)
         {
             decimal dependentNetDeduction = EmployeeConstant.dependentDeductionValue;
-
-            //int countDepStartwithA = dependents.Where(s => s != null && s.ToLower().StartsWith("a")).Count();
+            
             int countDepStartwithA = dependents.Where(s => s != null && s.DependentName.ToLower().StartsWith("a")).Count();
 
             if (EmployeeConstant.discountType == nameof(DiscountType.Percentage))
             {
-                //Starting with A
+                //If dependent name starts with A, apply special discount
                 dependentNetDeduction = ((1 - (EmployeeConstant.dependentSpecialDiscountPercentage / 100)) * (EmployeeConstant.dependentDeductionValue * countDepStartwithA));
 
-                //Not starting with A
+                //For dependents name not starting with A
                 dependentNetDeduction += (EmployeeConstant.dependentDeductionValue * (dependents.Count - countDepStartwithA));
             }
 
