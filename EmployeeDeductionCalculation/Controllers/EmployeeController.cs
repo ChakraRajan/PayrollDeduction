@@ -12,7 +12,7 @@ namespace EmployeeDeductionCalculation.Controllers
 {
     public class EmployeeController : Controller
     {
-        static Employee emp = new Employee();
+        static Employee emp = new Employee();        
 
         // GET: Employee
         public ActionResult Index()
@@ -23,9 +23,7 @@ namespace EmployeeDeductionCalculation.Controllers
         //Display Add dependent partial view as Modal popup
         public ActionResult DisplayDependent()
         {
-            Dependent empDep = new Dependent();
-
-            return PartialView("_DependentDetails", empDep);            
+            return PartialView("_DependentDetails");
         }
 
         //POST: To post the Add dependant values
@@ -68,6 +66,7 @@ namespace EmployeeDeductionCalculation.Controllers
         public ActionResult CalculateEmployeeDeduction(Employee emp1)
         {
             emp.EmployeeName = emp1.EmployeeName;
+
             Deduction dec = Calculate();
 
             TempData["Deductions"] = dec;

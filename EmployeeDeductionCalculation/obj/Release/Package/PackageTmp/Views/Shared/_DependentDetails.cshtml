@@ -1,0 +1,16 @@
+﻿@model EmployeeDeductionCalculation.Models.Dependent
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(m => m.DependentName, new { @class = "form-control" })
+        </dt>
+        <dd>
+            @Html.TextBoxFor(m => m.DependentName, new { @class = "form-control" })
+        </dd>
+    </dl>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="btnAddDependency" onclick="return AddDependent();">Add Dependent</button>
+    </div>
+</div>
